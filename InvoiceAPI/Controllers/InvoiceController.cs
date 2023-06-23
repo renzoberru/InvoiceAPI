@@ -1,4 +1,5 @@
-﻿using InvoiceAPI.DTO;
+﻿using DataBase.Models;
+using InvoiceAPI.DTO;
 using InvoiceAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace InvoiceAPI.Controllers
         /// </remarks>        
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto la ApiKey.</response>              
         /// <response code="200">OK. Devuelve la lista de facturas.</response>        
+        /// <response code="204">NoContent. La solicitud se ha completado con éxito, pero sin contenido.</response>
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         [HttpGet("Invoices")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -35,6 +37,10 @@ namespace InvoiceAPI.Controllers
             if (invoices == null) 
             { 
                 return NotFound();
+            }
+            if (invoices.Count() == 0)
+            {
+                return NoContent();
             }
             return Ok(invoices);
         }
@@ -48,7 +54,8 @@ namespace InvoiceAPI.Controllers
         /// </remarks>
         /// <param name="buyerRut">Rut del Comprador</param>
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto la ApiKey.</response>              
-        /// <response code="200">OK. Devuelve la lista de facturas del comprador.</response>        
+        /// <response code="200">OK. Devuelve la lista de facturas del comprador.</response>     
+        /// <response code="204">NoContent. La solicitud se ha completado con éxito, pero sin contenido.</response>
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         [HttpGet("{buyerRut}")]
         public ActionResult<List<InvoiceDTO>> InvoicesByBuyerRut(double buyerRut)
@@ -57,6 +64,10 @@ namespace InvoiceAPI.Controllers
             if (buyerInvoices == null)
             {
                 return NotFound();
+            }
+            if (buyerInvoices.Count() == 0)
+            {
+                return NoContent();
             }
             return Ok(buyerInvoices);
         }

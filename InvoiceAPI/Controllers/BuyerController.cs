@@ -25,7 +25,8 @@ namespace InvoiceAPI.Controllers
         /// Devuelve al comprador que tiene asociado más facturas (compras) registradas en JsonEjemplo.json.
         /// </remarks>
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto la ApiKey.</response>              
-        /// <response code="200">OK. Devuelve al comprador frecuente.</response>        
+        /// <response code="200">OK. Devuelve al comprador frecuente.</response>
+        /// <response code="204">NoContent. La solicitud se ha completado con éxito, pero sin contenido.</response>
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         [HttpGet("FrequentBuyer")]
         public ActionResult<FrequentBuyerDTO> FrequentBuyer()

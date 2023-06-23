@@ -23,7 +23,8 @@ namespace InvoiceAPI.Controllers
         /// Devuelve el listado de facturas registradas en JsonEjemplo.json, agrupadas por la comuna de comprador.
         /// </remarks>
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto la ApiKey.</response>              
-        /// <response code="200">OK. Devuelve el listado de facturas agrupadas por comuna.</response>        
+        /// <response code="200">OK. Devuelve el listado de facturas agrupadas por comuna.</response>
+        /// <response code="204">NoContent. La solicitud se ha completado con éxito, pero sin contenido.</response>
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         [HttpGet]
         public ActionResult<InvoicesByCommuneService> InvoicesGroupByCommune()
@@ -32,7 +33,7 @@ namespace InvoiceAPI.Controllers
             if (invoiceResponse == null)
             { 
                 return NotFound();
-            }
+            }            
             return Ok(invoiceResponse);
         }
     }
